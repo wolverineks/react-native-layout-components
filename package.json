@@ -8,6 +8,7 @@
     "ios": "expo start --ios",
     "eject": "expo eject",
     "flow": "flow",
+    "precommit": "yarn flow status && yarn test",
     "test": "node_modules/.bin/jest"
   },
   "dependencies": {
@@ -19,6 +20,7 @@
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "flow-bin": "^0.79.1",
+    "husky": "^0.14.3",
     "jest": "^23.5.0",
     "jest-expo": "^29.0.0",
     "prop-types": "^15.6.2",
