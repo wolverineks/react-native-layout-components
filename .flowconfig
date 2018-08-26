@@ -5,6 +5,8 @@
 
 <PROJECT_ROOT>/node_modules/metro-bundler/.*
 <PROJECT_ROOT>/node_modules/react-native/.*
+<PROJECT_ROOT>/node_modules/@expo/.*
+<PROJECT_ROOT>/node_modules/xdl/.*
 .*/eslint-config-universe/.*
 .*/jest-expo/node_modules/.*
 .*/vector-icons/.*

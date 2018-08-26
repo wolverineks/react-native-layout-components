@@ -6,6 +6,7 @@
     "android": "expo start --android",
     "precommit": "yarn flow status && yarn test",
     "eject": "expo eject",
+    "expobook": "./node_modules/.bin/expobook",
     "flow": "flow",
     "format": "sort-package-json; import-sort --write '*.js'; prettier --write '*.js'; eslint --fix --ignore-pattern '!.eslintrc.js' '*.js';",
     "ios": "expo start --ios",
@@ -17,6 +18,7 @@
   },
   "dependencies": {
     "expo": "^29.0.0",
+    "expobook": "^0.0.4",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-29.0.0.tar.gz"
   },
