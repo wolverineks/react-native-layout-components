@@ -1,5 +1,6 @@
 // @flow
-/* globals jest describe it expect */
+
+/* globals describe it expect */
 
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
