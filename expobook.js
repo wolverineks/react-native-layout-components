@@ -2,7 +2,14 @@
 
 import createExpobook from 'expobook'
 import React from 'react'
-import { Button, View } from 'react-native'
+import { TouchableOpacity, Text } from 'react-native'
+
+import Row from './src/Row.js'
+import Col from './src/Col.js'
+
+const Layout = Col
+const Header = Row
+const Body = Col
 
 const expobook = createExpobook()
 
@@ -13,31 +20,36 @@ class MyButton extends React.Component<Props, State> {
   state = {
     debug: false,
     title: 'Hello'
-  };
+  }
 
   render () {
-    const debugStyle = this.state.debug
-      ? { borderColor: 'red', borderWidth: 1 }
-      : null
-
     return (
-      <View>
-        <Button title={'DEBUG'} onPress={this.handleDebugPress} />
-        <View style={debugStyle}>
-          <Button title={this.state.title} onPress={this.handleButtonPress} />
-        </View>
-      </View>
+      <Layout>
+        <Header height={60}>
+          <TouchableOpacity onPress={this.handleDebugPress}>
+            <Text>DEBUG</Text>
+          </TouchableOpacity>
+        </Header>
+
+        <Body top>
+          <Row shrinkVertical debug={this.state.debug}>
+            <TouchableOpacity onPress={this.handleButtonPress}>
+              <Text>{this.state.title}</Text>
+            </TouchableOpacity>
+          </Row>
+        </Body>
+      </Layout>
     )
   }
 
   handleDebugPress = () => {
     this.setState({ debug: !this.state.debug })
-  };
+  }
 
   handleButtonPress = () => {
     const title = this.state.title === 'Hello' ? 'Goodbye' : 'Hello'
     this.setState({ title })
-  };
+  }
 }
 
 expobook.add('My Button', () => <MyButton />)
