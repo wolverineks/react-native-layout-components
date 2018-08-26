@@ -1,7 +1,9 @@
+/* eslint-disable flowtype/require-valid-file-annotation */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StatusBar } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 import StateRestore from './components/state-restore';
 import StateSync from './components/state-sync';
@@ -12,7 +14,7 @@ export const ROUTE_NAME_KEY = 'ROUTE_NAME';
 const NEED_SAVE_STATE = __DEV__;
 
 const App = (props) => {
-  const Navigator = StackNavigator({
+  const Navigator = createStackNavigator({
     Home: {
       screen: (screenProps) => {
         if (NEED_SAVE_STATE) {
