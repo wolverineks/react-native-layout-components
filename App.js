@@ -1,31 +1,16 @@
 // @flow
 
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+/* globals __DEV__ */
 
-export type Props = {||}
+import { KeepAwake } from 'expo'
+import app from './__expobook__/'
 
-export default class App extends React.Component<Props> {
-  render () {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    )
-  }
+// eslint-disable-next-line import/no-unresolved, import/extensions
+import expobook from './expobook'
+
+// $FlowFixMe
+if (__DEV__) {
+  KeepAwake.activate()
 }
 
-const THEME = {
-  COLORS: {
-    WHITE: 'white'
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: THEME.COLORS.WHITE,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
+export default app(expobook)

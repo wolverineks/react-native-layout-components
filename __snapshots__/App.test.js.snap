@@ -1,22 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App should render 1`] = `
-<Component
-  style={
+<App
+  components={
     Object {
-      "alignItems": "center",
-      "backgroundColor": "white",
-      "flex": 1,
-      "justifyContent": "center",
+      "Showcase": [Function],
     }
   }
->
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    Open up App.js to start working on your app!
-  </Text>
-</Component>
+/>
 `;
