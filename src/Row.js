@@ -2,7 +2,9 @@
 
 import React, { Component } from 'react'
 import type { Node } from 'react'
-import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+
+import { withDirection } from './utils.js'
 
 const DEBUG = {
   borderColor: 'red',
@@ -48,12 +50,30 @@ export type Props = {|
   spaceBetween?: boolean,
   stretch?: boolean,
   style?: StyleSheet.Styles,
+  target?: boolean,
   top?: boolean,
   width?: number | string,
   wrap?: boolean
 |}
 
 export class Row extends Component<Props> {
+  static defaultProps = {
+    baseline: false,
+    bottom: false,
+    debug: false,
+    left: false,
+    right: false,
+    shrink: false,
+    shrinkHorizontal: false,
+    shrinkVertical: false,
+    spaceAround: false,
+    spaceBetween: false,
+    stretch: false,
+    target: false,
+    top: false,
+    wrap: false
+  }
+
   render () {
     const {
       baseline,
@@ -71,6 +91,7 @@ export class Row extends Component<Props> {
       spaceBetween,
       stretch,
       style,
+      target,
       top,
       width,
       wrap,
@@ -81,54 +102,39 @@ export class Row extends Component<Props> {
     let alignItems = null
     let flex = null
     let alignSelf = null
-
-    if (parentFlexDirection === 'row') {
-      if (top) justifyContent = { justifyContent: 'flex-start' }
-      if (bottom) justifyContent = { justifyContent: 'flex-end' }
-      if (spaceAround) justifyContent = { justifyContent: 'space-around' }
-      if (spaceBetween) justifyContent = { justifyContent: 'space-between' }
-
-      if (left) alignItems = { alignItems: 'flex-start' }
-      if (right) alignItems = { alignItems: 'flex-end' }
-      if (baseline) alignItems = { alignItems: 'baseline' }
-
-      if (width) flex = { flex: 0 }
-      if (shrink) flex = { flex: -1, alignSelf: 'auto' }
-      if (shrinkHorizontal) flex = { flex: -1 }
-
-      if (shrinkVertical) alignSelf = { alignSelf: 'auto' }
-      if (height) alignSelf = { alignSelf: 'auto' }
-    }
-
-    if (parentFlexDirection === 'column') {
-      if (left) justifyContent = { justifyContent: 'flex-start' }
-      if (right) justifyContent = { justifyContent: 'flex-end' }
-      if (spaceAround) justifyContent = { justifyContent: 'space-around' }
-      if (spaceBetween) justifyContent = { justifyContent: 'space-between' }
-
-      if (top) alignItems = { alignItems: 'flex-start' }
-      if (bottom) alignItems = { alignItems: 'flex-end' }
-      if (baseline) alignItems = { alignItems: 'baseline' }
-
-      if (height) flex = { flex: 0 }
-      if (shrink) flex = { flex: -1, alignSelf: 'auto' }
-      if (shrinkVertical) flex = { flex: -1 }
-
-      if (shrinkHorizontal) alignSelf = { alignSelf: 'auto' }
-      if (width) alignSelf = { alignSelf: 'auto' }
-    }
-
-    const size = { height, width }
-
     let wrapStyle = null
-    if (wrap) wrapStyle = { flexWrap: 'wrap' }
-
     let debugStyle = null
+
+    if (left) justifyContent = { justifyContent: 'flex-start' }
+    if (right) justifyContent = { justifyContent: 'flex-end' }
+    if (spaceAround) justifyContent = { justifyContent: 'space-around' }
+    if (spaceBetween) justifyContent = { justifyContent: 'space-between' }
+
+    if (top) alignItems = { alignItems: 'flex-start' }
+    if (bottom) alignItems = { alignItems: 'flex-end' }
+    if (baseline) alignItems = { alignItems: 'baseline' }
+
+    if (height) flex = { flex: 0 }
+    if (width) alignSelf = { alignSelf: 'auto' }
+    if (shrink) flex = { flex: -1 }
+    if (shrink) alignSelf = { alignSelf: 'auto' }
+
+    if (shrinkVertical) {
+      if (parentFlexDirection === 'column') flex = { flex: -1 }
+      if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
+      if (!parentFlexDirection) console.warn('Missing parentFlexDirection')
+    }
+
+    if (shrinkHorizontal) {
+      if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
+      if (parentFlexDirection === 'row') flex = { flex: -1 }
+      if (!parentFlexDirection) console.warn('Missing parentFlexDirection')
+    }
+
+    if (wrap) wrapStyle = { flexWrap: 'wrap' }
     if (debug) debugStyle = DEBUG
 
-    const childrenWithDirection = React.Children.map(children, child =>
-      React.cloneElement(child, { parentFlexDirection: 'row' })
-    )
+    const childrenWithDirection = withDirection('row', children)
 
     return (
       <View
@@ -140,9 +146,10 @@ export class Row extends Component<Props> {
           debugStyle,
           flex,
           justifyContent,
-          size,
           wrapStyle
         ]}
+        height={height}
+        width={width}
         {...props}
       >
         {childrenWithDirection}
