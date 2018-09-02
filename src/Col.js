@@ -34,6 +34,8 @@ export type Props = {|
   left?: boolean,
   maxHeight?: number | string,
   maxWidth?: number | string,
+  minHeight?: number | string,
+  minWidth?: number | string,
   padding?: number | string,
   paddingBottom?: number | string,
   paddingHorizontal?: number | string,
@@ -82,6 +84,10 @@ export class Col extends Component<Props> {
       debug,
       height,
       left,
+      maxHeight,
+      maxWidth,
+      minHeight,
+      minWidth,
       parentFlexDirection,
       right,
       shrink,
@@ -114,8 +120,15 @@ export class Col extends Component<Props> {
     if (right) alignItems = { alignItems: 'flex-end' }
     if (baseline) alignItems = { alignItems: 'baseline' }
 
-    if (width) flex = { flex: 0 }
-    if (height) alignSelf = { alignSelf: 'auto' }
+    if (width || maxWidth) {
+      if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
+      if (parentFlexDirection === 'row') flex = { flex: -1 }
+    }
+    if (height || maxHeight) {
+      if (parentFlexDirection === 'column') flex = { flex: -1 }
+      if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
+    }
+
     if (shrink) flex = { flex: -1 }
     if (shrink) alignSelf = { alignSelf: 'auto' }
 
@@ -150,6 +163,10 @@ export class Col extends Component<Props> {
         ]}
         height={height}
         width={width}
+        maxHeight={maxHeight}
+        maxWidth={maxWidth}
+        minHeight={minHeight}
+        minWidth={minWidth}
         {...props}
       >
         {childrenWithDirection}
