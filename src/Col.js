@@ -120,13 +120,22 @@ export class Col extends Component<Props> {
     if (right) alignItems = { alignItems: 'flex-end' }
     if (baseline) alignItems = { alignItems: 'baseline' }
 
-    if (width || maxWidth) {
+    if (width) {
       if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
       if (parentFlexDirection === 'row') flex = { flex: -1 }
     }
-    if (height || maxHeight) {
+    if (height) {
       if (parentFlexDirection === 'column') flex = { flex: -1 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
+    }
+
+    if (maxHeight) {
+      if (parentFlexDirection === 'column') flex = { flex: -1 }
+      if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
+    }
+    if (maxWidth) {
+      if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
+      if (parentFlexDirection === 'row') flex = { flex: -1, width: '100%' }
     }
 
     if (shrink) flex = { flex: -1 }

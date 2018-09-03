@@ -267,12 +267,7 @@ export class ExampleSceneStory extends React.Component<Props, State> {
           </Row>
         </Col>
 
-        <Row
-          marginLeft={'auto'}
-          marginRight={'auto'}
-          maxWidth={500}
-          maxHeight={500}
-        >
+        <Row>
           <NumPad onPress={() => null} />
         </Row>
       </Layout>

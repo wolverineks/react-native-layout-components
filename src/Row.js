@@ -120,11 +120,20 @@ export class Row extends Component<Props> {
     if (bottom) alignItems = { alignItems: 'flex-end' }
     if (baseline) alignItems = { alignItems: 'baseline' }
 
-    if (width || maxWidth) {
+    if (width) {
       if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
       if (parentFlexDirection === 'row') flex = { flex: -1 }
     }
-    if (height || maxHeight) {
+    if (height) {
+      if (parentFlexDirection === 'column') flex = { flex: -1 }
+      if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
+    }
+
+    if (maxWidth) {
+      if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
+      if (parentFlexDirection === 'row') flex = { flex: -1 }
+    }
+    if (maxHeight) {
       if (parentFlexDirection === 'column') flex = { flex: -1 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
     }
