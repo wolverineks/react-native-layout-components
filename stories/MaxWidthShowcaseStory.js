@@ -30,7 +30,7 @@ type Props = {||}
 export class MaxWidthShowcaseStory extends React.Component<Props> {
   render () {
     return (
-      <Layout padding={24}>
+      <Layout padding={4}>
         <Row height={50} style={styles.header}>
           <BackgroundLabel label={'<Row height={50}>'} />
         </Row>

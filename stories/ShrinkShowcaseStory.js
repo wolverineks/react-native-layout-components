@@ -30,7 +30,7 @@ type Props = {||}
 export class ShrinkShowcaseStory extends React.Component<Props> {
   render () {
     return (
-      <Layout padding={24}>
+      <Layout padding={4}>
         <Row height={50}>
           <Header />
           <BackgroundLabel label={'<Row height={50}>'} />

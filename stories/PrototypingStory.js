@@ -1,7 +1,15 @@
 // @flow
 
-import React from 'react'
-import { Alert, Text, TouchableWithoutFeedback, View } from 'react-native'
+import React, { type Node } from 'react'
+import {
+  Alert,
+  Animated,
+  LayoutAnimation,
+  NativeModules,
+  Text,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native'
 
 import * as Animatable from 'react-native-animatable'
 
@@ -10,34 +18,9 @@ import Col from '../src/Col.js'
 
 export const Layout = Col
 
-const animations = {
-  enter: {
-    from: {
-      // opacity: 0,
-      maxHeight: 0
-    },
-    to: {
-      // opacity: 1,
-      maxHeight: 999
-    }
-  },
-  exit: {
-    from: {
-      // opacity: 1,
-      maxHeight: 100
-    },
-    to: {
-      // opacity: 0,
-      maxHeight: 0
-    }
-  }
-}
-
-Animatable.initializeRegistryWithDefinitions(animations)
-const AnimatableRow = Animatable.createAnimatableComponent(Col)
-
 export type Props = {||}
-export class PrototypingStory extends React.Component<Props> {
+export type State = {| items: Array<string | number> |}
+export class PrototypingStory extends React.Component<Props, State> {
   state = {
     items: []
   }
@@ -59,13 +42,24 @@ export class PrototypingStory extends React.Component<Props> {
           </TouchableWithoutFeedback>
         </Row>
 
-        <Col debug>
+        <Col top debug>
           {this.state.items.map((item, index) => {
             return (
-              <Transition key={item}>
-                <Text>{item}</Text>
-                <Text>{item}</Text>
-              </Transition>
+              <Animation key={item}>
+                <Row
+                  left
+                  height={50}
+                  style={{
+                    borderColor: 'red',
+                    borderTopWidth: 1,
+                    borderBottomColor: 'blue',
+                    borderBottomWidth: 1
+                  }}
+                >
+                  <Text style={{ color: 'black' }}>{item}</Text>
+                  <Text style={{ color: 'red' }}>{item}</Text>
+                </Row>
+              </Animation>
             )
           })}
         </Col>
@@ -82,21 +76,22 @@ export class PrototypingStory extends React.Component<Props> {
   }
 
   removeItem = () => {
-    const [first, ...rest] = this.state.items
+    const [, ...rest] = this.state.items
     this.setState({ items: rest })
   }
 }
 
-export class Transition extends React.Component {
-  componentDidMount () {
-    setTimeout(this.ref.enter, 1000)
-  }
+const { UIManager } = NativeModules
 
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true)
+
+export type AnimationProps = {| children: Node, row?: boolean |}
+export class Animation extends React.Component<AnimationProps> {
   render () {
-    return (
-      <AnimatableRow debug ref={ref => (this.ref = ref)} {...this.props}>
-        {this.props.children}
-      </AnimatableRow>
-    )
+    LayoutAnimation.easeInEaseOut()
+    const { children } = this.props
+
+    return children
   }
 }

@@ -127,14 +127,18 @@ export class Col extends Component<Props> {
 
     if (width) {
       if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
+      // if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
       if (parentFlexDirection === 'row') flex = { flex: -1 }
+      // if (parentFlexDirection === 'row') flex = { flex: -1 }
     }
     if (height) {
       if (parentFlexDirection === 'column') flex = { flex: -1 }
+      // if (parentFlexDirection === 'column') flex = { flex: -1 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
     }
 
     if (maxHeight) {
+      flex = { flex: -1 }
       // if (parentFlexDirection === 'column') flex = { flex: -1 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
     }

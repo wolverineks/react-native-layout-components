@@ -30,7 +30,7 @@ type Props = {||}
 export class SizeShowcaseStory extends React.Component<Props> {
   render () {
     return (
-      <Layout padding={24}>
+      <Layout padding={4}>
         <Row height={50} style={styles.header}>
           <BackgroundLabel label={'<Row height={50}>'} />
         </Row>
@@ -73,12 +73,12 @@ const ColInCol = () => {
         <Text>{'<Col width={150}>'}</Text>
       </Col>
 
-      <Col debug height={25}>
-        <Text>{'<Col height={25}>'}</Text>
+      <Col debug height={20}>
+        <Text>{'<Col height={20}>'}</Text>
       </Col>
 
-      <Col debug height={50} width={250}>
-        <Text>{'<Col height={50} width={250}>'}</Text>
+      <Col debug height={80} width={80}>
+        <Text>{'<Col height={80} width={80}>'}</Text>
       </Col>
     </Col>
   )
@@ -97,8 +97,8 @@ const RowInRow = () => {
         <Text>{'<Row width={145}>'}</Text>
       </Row>
 
-      <Row debug height={70} width={100}>
-        <Text>{'<Row height={70} width={100}>'}</Text>
+      <Row debug height={100} width={100}>
+        <Text>{'<Row height={100} width={100}>'}</Text>
       </Row>
     </Row>
   )
@@ -109,16 +109,16 @@ const RowInCol = () => {
     <Col left style={styles.rowInCol}>
       <BackgroundLabel label={'<Col left>'} />
 
-      <Row debug height={25}>
-        <Text>{'<Row height={25}>'}</Text>
+      <Row debug height={20}>
+        <Text>{'<Row height={20}>'}</Text>
       </Row>
 
       <Row debug width={145}>
         <Text>{'<Row width={145}>'}</Text>
       </Row>
 
-      <Row debug height={40} width={200}>
-        <Text>{'<Row height={40} width={200}>'}</Text>
+      <Row debug height={80} width={80}>
+        <Text>{'<Row height={80} width={80}>'}</Text>
       </Row>
     </Col>
   )
@@ -129,16 +129,16 @@ const ColInRow = () => {
     <Row top style={styles.colInRow}>
       <BackgroundLabel label={'<Row top>'} />
 
-      <Col debug height={45}>
-        <Text>{'<Col height={45}>'}</Text>
+      <Col debug height={35}>
+        <Text>{'<Col height={35}>'}</Text>
       </Col>
 
-      <Col debug width={125}>
-        <Text>{'<Col width={125}>'}</Text>
+      <Col debug width={145}>
+        <Text>{'<Col width={145}>'}</Text>
       </Col>
 
-      <Col debug height={60} width={145}>
-        <Text>{'<Col height={60} width={145}>'}</Text>
+      <Col debug height={100} width={100}>
+        <Text>{'<Col height={100} width={100}>'}</Text>
       </Col>
     </Row>
   )

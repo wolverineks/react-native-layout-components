@@ -59,6 +59,8 @@ export type Props = {|
 |}
 
 export class Row extends Component<Props> {
+  missingParentFlexDirection = false
+
   static defaultProps = {
     baseline: false,
     bottom: false,
@@ -128,19 +130,24 @@ export class Row extends Component<Props> {
     if (width) {
       if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
       if (parentFlexDirection === 'row') flex = { flex: -1 }
+      if (!parentFlexDirection) this.missingParentFlexDirection = true
     }
     if (height) {
-      if (parentFlexDirection === 'column') flex = { flex: -1 }
+      flex = { flex: -1 }
+      // if (parentFlexDirection === 'column') flex = { flex: -1 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
+      if (!parentFlexDirection) this.missingParentFlexDirection = true
     }
 
     if (maxWidth) {
       if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
       // if (parentFlexDirection === 'row') flex = { flex: -1 }
+      if (!parentFlexDirection) this.missingParentFlexDirection = true
     }
     if (maxHeight) {
       // if (parentFlexDirection === 'column') flex = { flex: -1 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
+      if (!parentFlexDirection) this.missingParentFlexDirection = true
     }
 
     if (shrink) flex = { flex: -1 }
@@ -149,17 +156,20 @@ export class Row extends Component<Props> {
     if (shrinkVertical) {
       if (parentFlexDirection === 'column') flex = { flex: -1 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
-      if (!parentFlexDirection) console.warn('Missing parentFlexDirection')
+      if (!parentFlexDirection) this.missingParentFlexDirection = true
     }
 
     if (shrinkHorizontal) {
       if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
       if (parentFlexDirection === 'row') flex = { flex: -1 }
-      if (!parentFlexDirection) console.warn('Missing parentFlexDirection')
+      if (!parentFlexDirection) this.missingParentFlexDirection = true
     }
 
     const childrenWithDirection = withDirection('row', children)
 
+    if (this.missingParentFlexDirection) {
+      console.warn('Missing parentFlexDirection')
+    }
     return (
       <View
         style={[
