@@ -1,13 +1,7 @@
 // @flow
 
-import React, { type Node } from 'react'
-import {
-  Alert,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback as Touchable,
-  View
-} from 'react-native'
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
 import Row from '../src/Row.js'
 import Col from '../src/Col.js'
@@ -25,11 +19,11 @@ export const COLORS = {
 const styles = StyleSheet.create({
   backgroundLabel: { height: '100%', width: '100%', position: 'absolute' },
   backgroundText: { fontSize: 32, opacity: 0.5 },
-  section1: { backgroundColor: COLORS.RED },
-  section2: { backgroundColor: COLORS.ORANGE },
-  section3: { backgroundColor: COLORS.YELLOW },
-  section4: { backgroundColor: COLORS.GREEN },
-  section5: { backgroundColor: COLORS.BLUE }
+  header: { backgroundColor: COLORS.RED },
+  colInCol: { backgroundColor: COLORS.ORANGE },
+  rowInRow: { backgroundColor: COLORS.YELLOW },
+  rowInCol: { backgroundColor: COLORS.GREEN },
+  colInRow: { backgroundColor: COLORS.BLUE }
 })
 
 type Props = {||}
@@ -37,28 +31,24 @@ export class ShrinkShowcaseStory extends React.Component<Props> {
   render () {
     return (
       <Layout padding={24}>
-        <Row height={50} style={styles.section1}>
-          <BackgroundLabel label={'<Row height={50}>'} />
+        <Row height={50}>
           <Header />
+          <BackgroundLabel label={'<Row height={50}>'} />
         </Row>
 
-        <Col style={styles.section2}>
-          <BackgroundLabel label={'<Col>'} />
+        <Row>
           <ColInCol />
-        </Col>
+        </Row>
 
-        <Row style={styles.section3}>
-          <BackgroundLabel label={'<Row bottom>'} />
+        <Row>
           <RowInRow />
         </Row>
 
-        <Col style={styles.section4}>
-          <BackgroundLabel label={'<Col left>'} />
+        <Row>
           <RowInCol />
-        </Col>
+        </Row>
 
-        <Row style={styles.section5}>
-          <BackgroundLabel label={'<Row top>'} />
+        <Row>
           <ColInRow />
         </Row>
       </Layout>
@@ -75,15 +65,6 @@ const BackgroundLabel = ({ label }: BackgroundLabelProps) => {
   )
 }
 
-type AlertButtonProps = {| children: Node, message: string |}
-const AlertButton = ({ message, children }: AlertButtonProps) => {
-  return (
-    <Touchable onPress={() => Alert.alert(message)}>
-      <View>{children}</View>
-    </Touchable>
-  )
-}
-
 const Header = () => {
   return (
     <Row style={styles.header}>
@@ -95,22 +76,18 @@ const Header = () => {
 const ColInCol = () => {
   return (
     <Col style={styles.colInCol}>
+      <BackgroundLabel label={'<Col>'} />
+
       <Col debug shrink>
-        <AlertButton message={'<Col debug shrink>'}>
-          <Text>1. Col in Col</Text>
-        </AlertButton>
+        <Text>{'<Col shrink>'}</Text>
       </Col>
 
       <Col debug shrinkVertical>
-        <AlertButton message={'<Col debug shrinkVertical>'}>
-          <Text>2. Col in Col</Text>
-        </AlertButton>
+        <Text>{'<Col shrinkVertical>'}</Text>
       </Col>
 
       <Col debug shrinkHorizontal>
-        <AlertButton message={'<Col debug shrinkHorizontal>'}>
-          <Text>3. Col in Col</Text>
-        </AlertButton>
+        <Text>{'<Col shrinkHorizontal>'}</Text>
       </Col>
     </Col>
   )
@@ -119,22 +96,18 @@ const ColInCol = () => {
 const RowInRow = () => {
   return (
     <Row bottom style={styles.rowInRow}>
+      <BackgroundLabel label={'<Row bottom>'} />
+
       <Row debug shrink>
-        <AlertButton message={'<Row debug shrink>'}>
-          <Text>1. Row in Row</Text>
-        </AlertButton>
+        <Text>{'<Row shrink>'}</Text>
       </Row>
 
       <Row debug shrinkHorizontal>
-        <AlertButton message={'<Row debug shrinkHorizontal>'}>
-          <Text>2. Row in Row</Text>
-        </AlertButton>
+        <Text>{'<Row shrinkHorizontal>'}</Text>
       </Row>
 
       <Row debug shrinkVertical>
-        <AlertButton message={'<Row debug shrinkVertical>'}>
-          <Text>3. Row in Row</Text>
-        </AlertButton>
+        <Text>{'<Row shrinkVertical>'}</Text>
       </Row>
     </Row>
   )
@@ -143,22 +116,18 @@ const RowInRow = () => {
 const RowInCol = () => {
   return (
     <Col left style={styles.rowInCol}>
+      <BackgroundLabel label={'<Col left>'} />
+
       <Row debug shrink>
-        <AlertButton message={'<Row debug shrink>'}>
-          <Text>1. Row in Col</Text>
-        </AlertButton>
+        <Text>{'<Row shrink>'}</Text>
       </Row>
 
       <Row debug shrinkHorizontal>
-        <AlertButton message={'<Row debug shrinkHorizontal>'}>
-          <Text>2. Row in Col</Text>
-        </AlertButton>
+        <Text>{'<Row shrinkHorizontal>'}</Text>
       </Row>
 
       <Row debug shrinkVertical>
-        <AlertButton message={'<Row debug shrinkVertical>'}>
-          <Text>3. Row in Col</Text>
-        </AlertButton>
+        <Text>{'<Row shrinkVertical>'}</Text>
       </Row>
     </Col>
   )
@@ -167,22 +136,18 @@ const RowInCol = () => {
 const ColInRow = () => {
   return (
     <Row top style={styles.colInRow}>
+      <BackgroundLabel label={'<Row top>'} />
+
       <Col debug shrink>
-        <AlertButton message={'<Col debug shrink>'}>
-          <Text>1. Col in Row</Text>
-        </AlertButton>
+        <Text>{'<Col shrink>'}</Text>
       </Col>
 
       <Col debug shrinkHorizontal>
-        <AlertButton message={'<Col debug shrinkHorizontal>'}>
-          <Text>2. Col in Row</Text>
-        </AlertButton>
+        <Text>{'<Col shrinkHorizontal>'}</Text>
       </Col>
 
       <Col debug shrinkVertical>
-        <AlertButton message={'<Col debug shrinkVertical>'}>
-          <Text>3. Col in Row</Text>
-        </AlertButton>
+        <Text>{'<Col shrinkVertical>'}</Text>
       </Col>
     </Row>
   )

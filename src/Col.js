@@ -104,12 +104,17 @@ export class Col extends Component<Props> {
       ...props
     } = this.props
 
+    const wrapStyle = wrap && { flexWrap: 'wrap' }
+    const debugStyle = debug && DEBUG
+    const heightStyle = height && { height }
+    const widthStyle = width && { width }
+    const maxHeightStyle = maxHeight && { maxHeight }
+    const maxWidthStyle = maxWidth && { maxWidth }
+
     let justifyContent = null
     let alignItems = null
     let flex = null
     let alignSelf = null
-    let wrapStyle = null
-    let debugStyle = null
 
     if (top) justifyContent = { justifyContent: 'flex-start' }
     if (bottom) justifyContent = { justifyContent: 'flex-end' }
@@ -130,12 +135,12 @@ export class Col extends Component<Props> {
     }
 
     if (maxHeight) {
-      if (parentFlexDirection === 'column') flex = { flex: -1 }
+      // if (parentFlexDirection === 'column') flex = { flex: -1 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
     }
     if (maxWidth) {
       if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
-      if (parentFlexDirection === 'row') flex = { flex: -1, width: '100%' }
+      // if (parentFlexDirection === 'row') flex = { flex: -1 }
     }
 
     if (shrink) flex = { flex: -1 }
@@ -153,9 +158,6 @@ export class Col extends Component<Props> {
       if (!parentFlexDirection) console.warn('Missing parentFlexDirection')
     }
 
-    if (wrap) wrapStyle = { flexWrap: 'wrap' }
-    if (debug) debugStyle = DEBUG
-
     const childrenWithDirection = withDirection('column', children)
 
     return (
@@ -168,14 +170,12 @@ export class Col extends Component<Props> {
           debugStyle,
           flex,
           justifyContent,
-          wrapStyle
+          wrapStyle,
+          heightStyle,
+          widthStyle,
+          maxHeightStyle,
+          maxWidthStyle
         ]}
-        height={height}
-        width={width}
-        maxHeight={maxHeight}
-        maxWidth={maxWidth}
-        minHeight={minHeight}
-        minWidth={minWidth}
         {...props}
       >
         {childrenWithDirection}

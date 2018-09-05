@@ -1,13 +1,7 @@
 // @flow
 
-import React, { type Node } from 'react'
-import {
-  Alert,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback as Touchable,
-  View
-} from 'react-native'
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
 import Row from '../src/Row.js'
 import Col from '../src/Col.js'
@@ -25,11 +19,11 @@ export const COLORS = {
 const styles = StyleSheet.create({
   backgroundLabel: { height: '100%', width: '100%', position: 'absolute' },
   backgroundText: { fontSize: 32, opacity: 0.5 },
-  section1: { backgroundColor: COLORS.RED },
-  section2: { backgroundColor: COLORS.ORANGE },
-  section3: { backgroundColor: COLORS.YELLOW },
-  section4: { backgroundColor: COLORS.GREEN },
-  section5: { backgroundColor: COLORS.BLUE }
+  header: { backgroundColor: COLORS.RED },
+  colInCol: { backgroundColor: COLORS.ORANGE },
+  rowInRow: { backgroundColor: COLORS.YELLOW },
+  rowInCol: { backgroundColor: COLORS.GREEN },
+  colInRow: { backgroundColor: COLORS.BLUE }
 })
 
 type Props = {||}
@@ -37,28 +31,23 @@ export class MaxWidthShowcaseStory extends React.Component<Props> {
   render () {
     return (
       <Layout padding={24}>
-        <Row height={50} style={styles.section1}>
+        <Row height={50} style={styles.header}>
           <BackgroundLabel label={'<Row height={50}>'} />
-          <Header />
         </Row>
 
-        <Col style={styles.section2}>
-          <BackgroundLabel label={'<Col>'} />
+        <Col>
           <ColInCol />
         </Col>
 
-        <Row style={styles.section3}>
-          <BackgroundLabel label={'<Row bottom>'} />
+        <Row>
           <RowInRow />
         </Row>
 
-        <Col style={styles.section4}>
-          <BackgroundLabel label={'<Col left>'} />
+        <Col>
           <RowInCol />
         </Col>
 
-        <Row style={styles.section5}>
-          <BackgroundLabel label={'<Row top>'} />
+        <Row>
           <ColInRow />
         </Row>
       </Layout>
@@ -75,42 +64,21 @@ const BackgroundLabel = ({ label }: BackgroundLabelProps) => {
   )
 }
 
-type AlertButtonProps = {| children: Node, message: string |}
-const AlertButton = ({ message, children }: AlertButtonProps) => {
-  return (
-    <Touchable onPress={() => Alert.alert(message)}>
-      <View>{children}</View>
-    </Touchable>
-  )
-}
-
-const Header = () => {
-  return (
-    <Row>
-      <Text>Tap any element to see its props</Text>
-    </Row>
-  )
-}
-
 const ColInCol = () => {
   return (
-    <Col alignItems={'center'}>
-      <Col debug maxWidth={150}>
-        <AlertButton message={'<Col debug maxWidth={150}>'}>
-          <Text>1. Col in Col</Text>
-        </AlertButton>
+    <Col debug style={styles.colInCol}>
+      <BackgroundLabel label={'<Col>'} />
+
+      <Col debug maxWidth={100}>
+        <Text>{'<Col maxWidth={100}>'}</Text>
       </Col>
 
-      <Col debug maxWidth={150} marginHorizontal={'auto'}>
-        <AlertButton message={'<Col debug maxWidth={150}>'}>
-          <Text>2. Col in Col</Text>
-        </AlertButton>
+      <Col debug maxWidth={100}>
+        <Text>{'<Col maxWidth={100}>'}</Text>
       </Col>
 
-      <Col debug maxWidth={150}>
-        <AlertButton message={'<Col debug maxWidth={150}>'}>
-          <Text>3. Col in Col</Text>
-        </AlertButton>
+      <Col debug maxWidth={100}>
+        <Text>{'<Col maxWidth={100}>'}</Text>
       </Col>
     </Col>
   )
@@ -118,23 +86,19 @@ const ColInCol = () => {
 
 const RowInRow = () => {
   return (
-    <Row>
-      <Row debug maxWidth={150}>
-        <AlertButton message={'<Row debug maxWidth={150}>'}>
-          <Text>1. Row in Row</Text>
-        </AlertButton>
+    <Row right style={styles.rowInRow}>
+      <BackgroundLabel label={'<Row right>'} />
+
+      <Row debug maxWidth={100}>
+        <Text>{'<Row maxWidth={100}>'}</Text>
       </Row>
 
-      <Row debug maxWidth={150}>
-        <AlertButton message={'<Row debug maxWidth={150}>'}>
-          <Text>2. Row in Row</Text>
-        </AlertButton>
+      <Row debug maxWidth={100}>
+        <Text>{'<Row maxWidth={100}>'}</Text>
       </Row>
 
-      <Row debug maxWidth={150}>
-        <AlertButton message={'<Row debug maxWidth={150}>'}>
-          <Text>3. Row in Row</Text>
-        </AlertButton>
+      <Row debug maxWidth={100}>
+        <Text>{'<Row maxWidth={100}>'}</Text>
       </Row>
     </Row>
   )
@@ -142,23 +106,19 @@ const RowInRow = () => {
 
 const RowInCol = () => {
   return (
-    <Col>
-      <Row debug maxWidth={150}>
-        <AlertButton message={'<Row debug maxWidth={150}>'}>
-          <Text>1. Row in Col</Text>
-        </AlertButton>
+    <Col left style={styles.rowInCol}>
+      <BackgroundLabel label={'<Col left>'} />
+
+      <Row debug maxWidth={100}>
+        <Text>{'<Row maxWidth={100}>'}</Text>
       </Row>
 
-      <Row debug maxWidth={150}>
-        <AlertButton message={'<Row debug maxWidth={150}>'}>
-          <Text>2. Row in Col</Text>
-        </AlertButton>
+      <Row debug maxWidth={100}>
+        <Text>{'<Row maxWidth={100}>'}</Text>
       </Row>
 
-      <Row debug maxWidth={150}>
-        <AlertButton message={'<Row debug maxWidth={150}>'}>
-          <Text>3. Row in Col</Text>
-        </AlertButton>
+      <Row debug maxWidth={100}>
+        <Text>{'<Row maxWidth={100}>'}</Text>
       </Row>
     </Col>
   )
@@ -166,23 +126,19 @@ const RowInCol = () => {
 
 const ColInRow = () => {
   return (
-    <Row>
-      <Col debug maxWidth={50} width={250}>
-        <AlertButton message={'<Col debug maxWidth={50}>'}>
-          <Text>1.ColinRow</Text>
-        </AlertButton>
+    <Row style={styles.colInRow}>
+      <BackgroundLabel label={'<Row top>'} />
+
+      <Col debug maxWidth={100}>
+        <Text>{'<Col maxWidth={100}>'}</Text>
       </Col>
 
-      <Col debug maxWidth={50} width={250}>
-        <AlertButton message={'<Col debug maxWidth={50}>'}>
-          <Text>2.ColinRow</Text>
-        </AlertButton>
+      <Col debug maxWidth={100}>
+        <Text>{'<Col maxWidth={100}>'}</Text>
       </Col>
 
-      <Col debug maxWidth={50} width={250}>
-        <AlertButton message={'<Col debug maxWidth={50}>'}>
-          <Text>3.ColinRow</Text>
-        </AlertButton>
+      <Col debug maxWidth={100}>
+        <Text>{'<Col maxWidth={100}>'}</Text>
       </Col>
     </Row>
   )

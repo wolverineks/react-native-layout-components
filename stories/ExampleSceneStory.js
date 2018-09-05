@@ -6,6 +6,77 @@ import { Text as RNText, TouchableOpacity } from 'react-native'
 import Row from '../src/Row.js'
 import Col from '../src/Col.js'
 
+type Props = {||}
+type State = {|
+  address: string,
+  destination: string,
+  exchangeRate: number,
+  fee: string,
+  primary: string,
+  primaryCurrencyCode: string,
+  primarySymbol: string,
+  secondary: string,
+  secondaryCurrencyCode: string,
+  secondaryFee: string,
+  secondarySymbol: string,
+  uniqueIdentifier: string
+|}
+
+export class ExampleSceneStory extends React.Component<Props, State> {
+  state = {
+    primary: '0.00000000',
+    secondary: '0.00',
+    primarySymbol: 'B',
+    primaryCurrencyCode: 'BTC',
+    secondaryCurrencyCode: 'USD',
+    secondarySymbol: '$',
+    fee: '0.0000123',
+    secondaryFee: '0.08',
+    address: '12139q8xM084QC30MTX48F12139q8xM084QC30MTX48F',
+    exchangeRate: 6281.32
+  }
+
+  render () {
+    return (
+      <Layout style={{ backgroundColor: '#0066cc' }}>
+        <Col padding={8}>
+          <Row shrinkVertical>
+            <ExchangeRate {...this.state} />
+          </Row>
+
+          <Spacer height={8} />
+
+          <Row>
+            <FlipInput {...this.state} />
+          </Row>
+
+          <Spacer height={8} />
+
+          <Row>
+            <TransactionDetails {...this.state} />
+          </Row>
+
+          <Spacer height={8} />
+
+          <Row
+            flex={1}
+            maxHeight={60}
+            maxWidth={500}
+            marginLeft={'auto'}
+            marginRight={'auto'}
+          >
+            <Slider />
+          </Row>
+        </Col>
+
+        <Row maxHeight={400} flex={1}>
+          <NumPad onPress={() => null} />
+        </Row>
+      </Layout>
+    )
+  }
+}
+
 export type TextProps = {|
   bold?: boolean,
   children?: string,
@@ -160,38 +231,38 @@ const Slider = ({ ...props }) => (
 )
 const NumPad = ({ onPress, ...props }) => {
   return (
-    <Col style={{ backgroundColor: '#0099cc' }} {...props}>
+    <Col maxWidth={600} {...props}>
       <NumPadRow>
-        <NumPadButton debug onPress={() => null} label={'1'} />
-        <NumPadButton debug onPress={() => null} label={'2'} />
-        <NumPadButton debug onPress={() => null} label={'3'} />
+        <NumPadButton label={'1'} />
+        <NumPadButton label={'2'} />
+        <NumPadButton label={'3'} />
       </NumPadRow>
 
       <NumPadRow>
-        <NumPadButton debug onPress={() => null} label={'4'} />
-        <NumPadButton debug onPress={() => null} label={'5'} />
-        <NumPadButton debug onPress={() => null} label={'6'} />
+        <NumPadButton label={'4'} />
+        <NumPadButton label={'5'} />
+        <NumPadButton label={'6'} />
       </NumPadRow>
 
       <NumPadRow>
-        <NumPadButton debug onPress={() => null} label={'7'} />
-        <NumPadButton debug onPress={() => null} label={'8'} />
-        <NumPadButton debug onPress={() => null} label={'9'} />
+        <NumPadButton label={'7'} />
+        <NumPadButton label={'8'} />
+        <NumPadButton label={'9'} />
       </NumPadRow>
 
       <NumPadRow>
-        <NumPadButton debug onPress={() => null} label={'.'} />
-        <NumPadButton debug onPress={() => null} label={'0'} />
-        <NumPadButton debug onPress={() => null} label={'<-'} />
+        <NumPadButton label={'.'} />
+        <NumPadButton label={'0'} />
+        <NumPadButton label={'<-'} />
       </NumPadRow>
     </Col>
   )
 }
 const NumPadRow = Row
-const NumPadButton = ({ label, onPress, ...props }) => (
-  <Col {...props}>
+const NumPadButton = ({ label, onPress = () => null, ...props }) => (
+  <Col margin={4} borderRadius={15} {...props}>
     <TouchableOpacity
-      style={{ height: '100%', width: '100%' }}
+      style={{ height: '100%', width: '100%', backgroundColor: '#0099cc' }}
       onPress={onPress}
     >
       <Col>
@@ -202,75 +273,3 @@ const NumPadButton = ({ label, onPress, ...props }) => (
     </TouchableOpacity>
   </Col>
 )
-
-type Props = {||}
-type State = {|
-  address: string,
-  destination: string,
-  exchangeRate: number,
-  fee: string,
-  primary: string,
-  primaryCurrencyCode: string,
-  primarySymbol: string,
-  secondary: string,
-  secondaryCurrencyCode: string,
-  secondaryFee: string,
-  secondarySymbol: string,
-  uniqueIdentifier: string
-|}
-
-export class ExampleSceneStory extends React.Component<Props, State> {
-  state = {
-    primary: '0.00000000',
-    secondary: '0.00',
-    primarySymbol: 'B',
-    primaryCurrencyCode: 'BTC',
-    secondaryCurrencyCode: 'USD',
-    secondarySymbol: '$',
-    fee: '0.0000123',
-    secondaryFee: '0.08',
-    destination: 'Airbitz, inc.',
-    address: '12139q8xM084QC30MTX48F12139q8xM084QC30MTX48F',
-    exchangeRate: 6281.32
-  }
-
-  render () {
-    return (
-      <Layout style={{ backgroundColor: '#0066cc' }}>
-        <Col padding={8}>
-          <Row shrinkVertical>
-            <ExchangeRate {...this.state} />
-          </Row>
-
-          <Spacer height={8} />
-
-          <Row>
-            <FlipInput {...this.state} />
-          </Row>
-
-          <Spacer height={8} />
-
-          <Row>
-            <TransactionDetails {...this.state} />
-          </Row>
-
-          <Spacer height={8} />
-
-          <Row
-            shrinkVertical
-            minHeight={60}
-            maxWidth={500}
-            marginLeft={'auto'}
-            marginRight={'auto'}
-          >
-            <Slider />
-          </Row>
-        </Col>
-
-        <Row>
-          <NumPad onPress={() => null} />
-        </Row>
-      </Layout>
-    )
-  }
-}
