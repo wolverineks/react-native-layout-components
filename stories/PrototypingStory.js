@@ -42,13 +42,14 @@ export class PrototypingStory extends React.Component<Props, State> {
           </TouchableWithoutFeedback>
         </Row>
 
-        <Col top debug>
+        <Row top debug>
           {this.state.items.map((item, index) => {
             return (
               <Animation key={item}>
                 <Row
+                  parentFlexDirection={'row'}
                   left
-                  height={50}
+                  width={50}
                   style={{
                     borderColor: 'red',
                     borderTopWidth: 1,
@@ -62,7 +63,7 @@ export class PrototypingStory extends React.Component<Props, State> {
               </Animation>
             )
           })}
-        </Col>
+        </Row>
       </Layout>
     )
   }

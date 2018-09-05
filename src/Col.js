@@ -59,6 +59,9 @@ export type Props = {|
 |}
 
 export class Col extends Component<Props> {
+  missingParentFlexDirection = false
+  requestedProperties = {}
+
   static defaultProps = {
     baseline: false,
     bottom: false,
@@ -125,26 +128,26 @@ export class Col extends Component<Props> {
     if (right) alignItems = { alignItems: 'flex-end' }
     if (baseline) alignItems = { alignItems: 'baseline' }
 
-    if (width) {
-      if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
-      // if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
-      if (parentFlexDirection === 'row') flex = { flex: -1 }
-      // if (parentFlexDirection === 'row') flex = { flex: -1 }
-    }
     if (height) {
       if (parentFlexDirection === 'column') flex = { flex: -1 }
-      // if (parentFlexDirection === 'column') flex = { flex: -1 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
+      if (!parentFlexDirection) this.logMissingParentFlexDirection('height')
+    }
+    if (width) {
+      if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
+      if (parentFlexDirection === 'row') flex = { flex: -1 }
+      if (!parentFlexDirection) this.logMissingParentFlexDirection('width')
     }
 
     if (maxHeight) {
-      flex = { flex: -1 }
       // if (parentFlexDirection === 'column') flex = { flex: -1 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
+      if (!parentFlexDirection) this.logMissingParentFlexDirection('maxHeight')
     }
     if (maxWidth) {
       if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
       // if (parentFlexDirection === 'row') flex = { flex: -1 }
+      if (!parentFlexDirection) this.logMissingParentFlexDirection('maxWidth')
     }
 
     if (shrink) flex = { flex: -1 }
@@ -153,16 +156,24 @@ export class Col extends Component<Props> {
     if (shrinkVertical) {
       if (parentFlexDirection === 'column') flex = { flex: -1 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
-      if (!parentFlexDirection) console.warn('Missing parentFlexDirection')
+      if (!parentFlexDirection) {
+        this.logMissingParentFlexDirection('shrinkVertical')
+      }
     }
 
     if (shrinkHorizontal) {
       if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
       if (parentFlexDirection === 'row') flex = { flex: -1 }
-      if (!parentFlexDirection) console.warn('Missing parentFlexDirection')
+      if (!parentFlexDirection) {
+        this.logMissingParentFlexDirection('shrinkHorizontal')
+      }
     }
 
     const childrenWithDirection = withDirection('column', children)
+
+    if (this.missingParentFlexDirection) {
+      console.warn('Missing parentFlexDirection')
+    }
 
     return (
       <View
@@ -186,6 +197,20 @@ export class Col extends Component<Props> {
       </View>
     )
   }
+
+  logMissingParentFlexDirection = (property: string) => {
+    this.missingParentFlexDirection = true
+    this.requestedProperties = { ...this.requestedProperties, [property]: true }
+  }
 }
 
 export default Col
+
+export const displayMissingParentFlexDirectionWarning = (
+  properties: Array<string>
+) => {
+  const warning = `Missing parentFlexDirection: Using [${properties.join(
+    ', '
+  )}] on layout components outside of another layout component may lead to unexpected behavior. To fix this, wrap the component(s) using these properties with another layout component that does not use any of these properties.`
+  console.warn(warning)
+}
