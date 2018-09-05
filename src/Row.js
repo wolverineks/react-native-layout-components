@@ -129,32 +129,32 @@ export class Row extends Component<Props> {
     if (baseline) alignItems = { alignItems: 'baseline' }
 
     if (height) {
-      if (parentFlexDirection === 'column') flex = { flex: -1 }
+      if (parentFlexDirection === 'column') flex = { flex: 0 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
       if (!parentFlexDirection) this.logMissingParentFlexDirection('height')
     }
     if (width) {
       if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
-      if (parentFlexDirection === 'row') flex = { flex: -1 }
+      if (parentFlexDirection === 'row') flex = { flex: 0 }
       if (!parentFlexDirection) this.logMissingParentFlexDirection('width')
     }
 
     if (maxHeight) {
-      // if (parentFlexDirection === 'column') flex = { flex: -1 }
+      // if (parentFlexDirection === 'column') flex = { flex: 0 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
       if (!parentFlexDirection) this.logMissingParentFlexDirection('maxHeight')
     }
     if (maxWidth) {
-      // if (parentFlexDirection === 'row') flex = { flex: -1 }
+      // if (parentFlexDirection === 'row') flex = { flex: 0 }
       if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
       if (!parentFlexDirection) this.logMissingParentFlexDirection('maxWidth')
     }
 
-    if (shrink) flex = { flex: -1 }
+    if (shrink) flex = { flex: 0 }
     if (shrink) alignSelf = { alignSelf: 'auto' }
 
     if (shrinkVertical) {
-      if (parentFlexDirection === 'column') flex = { flex: -1 }
+      if (parentFlexDirection === 'column') flex = { flex: 0 }
       if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
       if (!parentFlexDirection) {
         this.logMissingParentFlexDirection('shrinkVertical')
@@ -163,7 +163,7 @@ export class Row extends Component<Props> {
 
     if (shrinkHorizontal) {
       if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
-      if (parentFlexDirection === 'row') flex = { flex: -1 }
+      if (parentFlexDirection === 'row') flex = { flex: 0 }
       if (!parentFlexDirection) {
         this.logMissingParentFlexDirection('shrinkHorizontal')
       }
