@@ -213,6 +213,6 @@ export const displayMissingParentFlexDirectionWarning = (
 ) => {
   const warning = `Missing parentFlexDirection: Using [${properties.join(
     ', '
-  )}] on layout components outside of another layout component may lead to unexpected behavior. To fix this, wrap the component(s) using these properties with another layout component that does not use any of these properties.`
+  )}] on layout components outside of another layout component may lead to unexpected behavior. To fix this, wrap the component(s) using these properties with another layout component that does not use any of these properties, or manually specify the parentFlexDirection in the component props.`
   console.warn(warning)
 }
