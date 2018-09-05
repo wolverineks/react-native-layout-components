@@ -4,7 +4,10 @@ import React, { Component } from 'react'
 import type { Node } from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import { withDirection } from './utils.js'
+import {
+  displayMissingParentFlexDirectionWarning,
+  withDirection
+} from './utils.js'
 
 const DEBUG = {
   borderColor: 'red',
@@ -207,12 +210,3 @@ export class Row extends Component<Props> {
 }
 
 export default Row
-
-export const displayMissingParentFlexDirectionWarning = (
-  properties: Array<string>
-) => {
-  const warning = `Missing parentFlexDirection: Using [${properties.join(
-    ', '
-  )}] on layout components outside of another layout component may lead to unexpected behavior. To fix this, wrap the component(s) using these properties with another layout component that does not use any of these properties, or manually specify the parentFlexDirection in the component props.`
-  console.warn(warning)
-}

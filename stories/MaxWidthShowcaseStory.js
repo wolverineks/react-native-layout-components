@@ -77,8 +77,8 @@ const ColInCol = () => {
         <Text>{'<Col maxWidth={100}>'}</Text>
       </Col>
 
-      <Col debug maxWidth={100}>
-        <Text>{'<Col maxWidth={100}>'}</Text>
+      <Col debug width={100}>
+        <Text>{'<Col width={100}>'}</Text>
       </Col>
     </Col>
   )
@@ -97,8 +97,8 @@ const RowInRow = () => {
         <Text>{'<Row maxWidth={100}>'}</Text>
       </Row>
 
-      <Row debug maxWidth={100}>
-        <Text>{'<Row maxWidth={100}>'}</Text>
+      <Row debug width={100}>
+        <Text>{'<Row width={100}>'}</Text>
       </Row>
     </Row>
   )
@@ -117,8 +117,8 @@ const RowInCol = () => {
         <Text>{'<Row maxWidth={100}>'}</Text>
       </Row>
 
-      <Row debug maxWidth={100}>
-        <Text>{'<Row maxWidth={100}>'}</Text>
+      <Row debug width={100}>
+        <Text>{'<Row width={100}>'}</Text>
       </Row>
     </Col>
   )
@@ -137,8 +137,8 @@ const ColInRow = () => {
         <Text>{'<Col maxWidth={100}>'}</Text>
       </Col>
 
-      <Col debug maxWidth={100}>
-        <Text>{'<Col maxWidth={100}>'}</Text>
+      <Col debug width={100}>
+        <Text>{'<Col width={100}>'}</Text>
       </Col>
     </Row>
   )

@@ -77,8 +77,8 @@ const ColInCol = () => {
         <Text>{'<Col maxHeight={40}>'}</Text>
       </Col>
 
-      <Col debug maxHeight={40}>
-        <Text>{'<Col maxHeight={40}>'}</Text>
+      <Col debug height={40}>
+        <Text>{'<Col height={40}>'}</Text>
       </Col>
     </Col>
   )
@@ -97,8 +97,8 @@ const RowInRow = () => {
         <Text>{'<Row maxHeight={40}>'}</Text>
       </Row>
 
-      <Row debug maxHeight={40}>
-        <Text>{'<Row maxHeight={40}>'}</Text>
+      <Row debug height={40}>
+        <Text>{'<Row height={40}>'}</Text>
       </Row>
     </Row>
   )
@@ -117,8 +117,8 @@ const RowInCol = () => {
         <Text>{'<Row maxHeight={40}>'}</Text>
       </Row>
 
-      <Row debug maxHeight={40}>
-        <Text>{'<Row maxHeight={40}>'}</Text>
+      <Row debug height={40}>
+        <Text>{'<Row height={40}>'}</Text>
       </Row>
     </Col>
   )
@@ -137,8 +137,8 @@ const ColInRow = () => {
         <Text>{'<Col maxHeight={40}>'}</Text>
       </Col>
 
-      <Col debug maxHeight={40}>
-        <Text>{'<Col maxHeight={40}>'}</Text>
+      <Col debug height={40}>
+        <Text>{'<Col height={40}>'}</Text>
       </Col>
     </Row>
   )
