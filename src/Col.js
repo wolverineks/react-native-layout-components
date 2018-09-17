@@ -139,14 +139,14 @@ export class Col extends Component<Props> {
     if (height != null) {
       heightStyle = { height }
       if (parentFlexDirection === 'column') {
-        flexStyle = { flex: -1 }
+        flexStyle = { flex: 0 }
       }
     }
 
     if (width != null) {
       widthStyle = { width }
       if (parentFlexDirection === 'row') {
-        flexStyle = { flex: -1 }
+        flexStyle = { flex: 0 }
       }
     }
 

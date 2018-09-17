@@ -27,7 +27,7 @@ export const rawStyles = {
     width: '100%'
   }
 }
-export const styles = StyleSheet.create(rawStyles)
+export const styles: typeof rawStyles = StyleSheet.create(rawStyles)
 
 export type Props = {|
   baseline?: boolean,
@@ -140,13 +140,13 @@ export class Row extends Component<Props> {
     if (height != null) {
       heightStyle = { height }
       if (parentFlexDirection === 'column') {
-        flexStyle = { flex: -1 }
+        flexStyle = { flex: 0 }
       }
     }
     if (width != null) {
       widthStyle = { width }
       if (parentFlexDirection === 'row') {
-        flexStyle = { flex: -1 }
+        flexStyle = { flex: 0 }
       }
     }
 
@@ -159,9 +159,15 @@ export class Row extends Component<Props> {
 
     if (shrink || shrinkVertical) {
       heightStyle = { height: null }
+      if (parentFlexDirection === 'column') {
+        flexStyle = { flex: -1 }
+      }
     }
     if (shrink || shrinkHorizontal) {
       widthStyle = { width: null }
+      if (parentFlexDirection === 'row') {
+        flexStyle = { flex: -1 }
+      }
     }
 
     if (this.missingParentFlexDirection) {
@@ -174,7 +180,6 @@ export class Row extends Component<Props> {
       <View
         style={[
           styles.row,
-          styles.asdads,
           style,
           alignItemsStyle,
           alignSelfStyle,
