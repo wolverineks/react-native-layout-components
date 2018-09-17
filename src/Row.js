@@ -174,6 +174,7 @@ export class Row extends Component<Props> {
       <View
         style={[
           styles.row,
+          styles.asdads,
           style,
           alignItemsStyle,
           alignSelfStyle,

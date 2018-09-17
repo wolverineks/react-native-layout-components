@@ -27,7 +27,7 @@ export const rawStyles = {
     width: '100%'
   }
 }
-export const styles = StyleSheet.create(rawStyles)
+export const styles: typeof rawStyles = StyleSheet.create(rawStyles)
 
 export type Props = {|
   baseline?: boolean,
