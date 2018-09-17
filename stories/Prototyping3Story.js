@@ -26,13 +26,13 @@ export class Prototyping3Story extends React.Component<Props, State> {
 
   render () {
     return (
-      <Col debug padding={24}>
+      <Row debug padding={24}>
         <Row debug>
           <Text>
             <Text>Hello, World!</Text>
           </Text>
         </Row>
-      </Col>
+      </Row>
     )
   }
 }

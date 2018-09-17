@@ -10,6 +10,7 @@
     "flow": "flow",
     "format": "sort-package-json; import-sort --write '*.js'; prettier --write '*.js'; eslint --fix --ignore-pattern '!.eslintrc.js' '*.js';",
     "ios": "expo start --ios",
+    "screenshot": "xcrun simctl io booted screenshot",
     "start": "expo start",
     "test": "node_modules/.bin/jest"
   },
