@@ -66,8 +66,8 @@ const BackgroundLabel = ({ label }: BackgroundLabelProps) => {
 
 const ColInCol = () => {
   return (
-    <Col debug style={styles.colInCol}>
-      <BackgroundLabel label={'<Col>'} />
+    <Col debug bottom style={styles.colInCol}>
+      <BackgroundLabel label={'<Col bottom>'} />
 
       <Col debug maxHeight={40}>
         <Text>{'<Col maxHeight={40}>'}</Text>
@@ -89,16 +89,16 @@ const RowInRow = () => {
     <Row bottom style={styles.rowInRow}>
       <BackgroundLabel label={'<Row bottom>'} />
 
-      <Row debug maxHeight={40}>
-        <Text>{'<Row maxHeight={40}>'}</Text>
+      <Row debug maxHeight={100}>
+        <Text>{'<Row maxHeight={100}>'}</Text>
       </Row>
 
-      <Row debug maxHeight={40}>
-        <Text>{'<Row maxHeight={40}>'}</Text>
+      <Row debug maxHeight={100}>
+        <Text>{'<Row maxHeight={100}>'}</Text>
       </Row>
 
-      <Row debug height={40}>
-        <Text>{'<Row height={40}>'}</Text>
+      <Row debug height={100}>
+        <Text>{'<Row height={100}>'}</Text>
       </Row>
     </Row>
   )
@@ -106,8 +106,8 @@ const RowInRow = () => {
 
 const RowInCol = () => {
   return (
-    <Col style={styles.rowInCol}>
-      <BackgroundLabel label={'<Col>'} />
+    <Col bottom style={styles.rowInCol}>
+      <BackgroundLabel label={'<Col bottom>'} />
 
       <Row debug maxHeight={40}>
         <Text>{'<Row maxHeight={40}>'}</Text>
@@ -126,19 +126,19 @@ const RowInCol = () => {
 
 const ColInRow = () => {
   return (
-    <Row top style={styles.colInRow}>
-      <BackgroundLabel label={'<Row top>'} />
+    <Row bottom style={styles.colInRow}>
+      <BackgroundLabel label={'<Row bottom>'} />
 
-      <Col debug maxHeight={40}>
-        <Text>{'<Col maxHeight={40}>'}</Text>
+      <Col debug maxHeight={100}>
+        <Text>{'<Col maxHeight={100}>'}</Text>
       </Col>
 
-      <Col debug maxHeight={40}>
-        <Text>{'<Col maxHeight={40}>'}</Text>
+      <Col debug maxHeight={100}>
+        <Text>{'<Col maxHeight={100}>'}</Text>
       </Col>
 
-      <Col debug height={40}>
-        <Text>{'<Col height={40}>'}</Text>
+      <Col debug height={100}>
+        <Text>{'<Col height={100}>'}</Text>
       </Col>
     </Row>
   )

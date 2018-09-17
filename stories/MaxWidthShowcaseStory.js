@@ -66,8 +66,8 @@ const BackgroundLabel = ({ label }: BackgroundLabelProps) => {
 
 const ColInCol = () => {
   return (
-    <Col debug style={styles.colInCol}>
-      <BackgroundLabel label={'<Col>'} />
+    <Col right debug style={styles.colInCol}>
+      <BackgroundLabel label={'<Col right>'} />
 
       <Col debug maxWidth={100}>
         <Text>{'<Col maxWidth={100}>'}</Text>
@@ -106,8 +106,8 @@ const RowInRow = () => {
 
 const RowInCol = () => {
   return (
-    <Col left style={styles.rowInCol}>
-      <BackgroundLabel label={'<Col left>'} />
+    <Col right style={styles.rowInCol}>
+      <BackgroundLabel label={'<Col right>'} />
 
       <Row debug maxWidth={100}>
         <Text>{'<Row maxWidth={100}>'}</Text>
@@ -126,8 +126,8 @@ const RowInCol = () => {
 
 const ColInRow = () => {
   return (
-    <Row style={styles.colInRow}>
-      <BackgroundLabel label={'<Row top>'} />
+    <Row right style={styles.colInRow}>
+      <BackgroundLabel label={'<Row right>'} />
 
       <Col debug maxWidth={100}>
         <Text>{'<Col maxWidth={100}>'}</Text>

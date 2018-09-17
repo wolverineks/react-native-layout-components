@@ -47,8 +47,9 @@ export class PrototypingStory extends React.Component<Props, State> {
             return (
               <Animation key={item}>
                 <Row
+                  parentFlexDirection={'column'}
                   left
-                  maxHeight={50}
+                  maxHeight={60}
                   style={{
                     borderColor: 'red',
                     borderTopWidth: 1,

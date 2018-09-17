@@ -84,22 +84,39 @@ const ColInCol = () => {
   )
 }
 
-const RowInRow = () => {
+const RowInRow = props => {
   return (
-    <Row bottom style={styles.rowInRow}>
+    <Row style={styles.rowInRow} {...props}>
       <BackgroundLabel label={'<Row bottom>'} />
-
-      <Row debug height={35}>
-        <Text>{'<Row height={35}>'}</Text>
+      <Row debug>
+        <Text>Hello, World!</Text>
       </Row>
-
+      {/* <View
+        style={{
+          backgroundColor: 'blue',
+          alignItems: 'center',
+          alignSelf: 'auto',
+          justifyContent: 'center',
+          flex: -1,
+          maxHeight: 500,
+          height: 500,
+          flexWrap: 'wrap',
+          maxWidth: 100,
+          borderColor: 'red',
+          borderWidth: 1
+        }}
+      >
+        <Text>KSJDNV</Text>
+      </View> */}
+      {/* <Row debug maxHeight={135} height={100}>
+        <Text>{'<Row maxHeight={135}>'}</Text>
+      </Row>
       <Row debug width={145}>
         <Text>{'<Row width={145}>'}</Text>
       </Row>
-
       <Row debug height={100} width={100}>
         <Text>{'<Row height={100} width={100}>'}</Text>
-      </Row>
+      </Row> */}
     </Row>
   )
 }

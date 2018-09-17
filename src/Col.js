@@ -6,7 +6,7 @@ import { StyleSheet, View } from 'react-native'
 
 import {
   displayMissingParentFlexDirectionWarning,
-  withDirection
+  withParentFlexDirection
 } from './utils.js'
 
 const DEBUG = {
@@ -18,12 +18,13 @@ export const rawStyles = {
   column: {
     // ...DEBUG,
     alignItems: 'center',
-    alignSelf: 'stretch',
     backgroundColor: 'transparent',
     flex: 1,
     flexDirection: 'column',
+    height: '100%',
     justifyContent: 'center',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    width: '100%'
   }
 }
 export const styles = StyleSheet.create(rawStyles)
@@ -33,6 +34,7 @@ export type Props = {|
   bottom?: boolean,
   children?: Node,
   debug?: boolean,
+  dontPassProps?: boolean,
   height?: number | string,
   left?: boolean,
   maxHeight?: number | string,
@@ -53,6 +55,7 @@ export type Props = {|
   shrinkVertical?: boolean,
   spaceAround?: boolean,
   spaceBetween?: boolean,
+  spaceEvenly?: boolean,
   stretch?: boolean,
   style?: StyleSheet.Styles,
   target?: boolean,
@@ -88,6 +91,7 @@ export class Col extends Component<Props> {
       bottom,
       children,
       debug,
+      dontPassProps,
       height,
       left,
       maxHeight,
@@ -101,6 +105,7 @@ export class Col extends Component<Props> {
       shrinkVertical,
       spaceAround,
       spaceBetween,
+      spaceEvenly,
       stretch,
       style,
       target,
@@ -112,67 +117,58 @@ export class Col extends Component<Props> {
 
     const wrapStyle = wrap && { flexWrap: 'wrap' }
     const debugStyle = debug && DEBUG
-    const heightStyle = height && { height }
-    const widthStyle = width && { width }
-    const maxHeightStyle = maxHeight && { maxHeight }
-    const maxWidthStyle = maxWidth && { maxWidth }
 
-    let justifyContent = null
-    let alignItems = null
-    let flex = null
-    let alignSelf = null
+    let heightStyle = null
+    let widthStyle = null
+    let maxHeightStyle = null
+    let maxWidthStyle = null
+    let alignItemsStyle = null
+    let flexStyle = null
+    let justifyContentStyle = null
 
-    if (top) justifyContent = { justifyContent: 'flex-start' }
-    if (bottom) justifyContent = { justifyContent: 'flex-end' }
-    if (spaceAround) justifyContent = { justifyContent: 'space-around' }
-    if (spaceBetween) justifyContent = { justifyContent: 'space-between' }
+    if (top) justifyContentStyle = { justifyContent: 'flex-start' }
+    if (bottom) justifyContentStyle = { justifyContent: 'flex-end' }
+    if (left) alignItemsStyle = { alignItems: 'flex-start' }
+    if (right) alignItemsStyle = { alignItems: 'flex-end' }
 
-    if (left) alignItems = { alignItems: 'flex-start' }
-    if (right) alignItems = { alignItems: 'flex-end' }
-    if (baseline) alignItems = { alignItems: 'baseline' }
+    if (baseline) alignItemsStyle = { alignItems: 'baseline' }
+    if (spaceAround) justifyContentStyle = { justifyContent: 'space-around' }
+    if (spaceBetween) justifyContentStyle = { justifyContent: 'space-between' }
+    if (spaceEvenly) justifyContentStyle = { justifyContent: 'space-evenly' }
 
-    if (height) {
-      if (parentFlexDirection === 'column') flex = { flex: 0 }
-      if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
-      if (!parentFlexDirection) this.logMissingParentFlexDirection('height')
-    }
-    if (width) {
-      if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
-      if (parentFlexDirection === 'row') flex = { flex: 0 }
-      if (!parentFlexDirection) this.logMissingParentFlexDirection('width')
-    }
-
-    if (maxHeight) {
-      // if (parentFlexDirection === 'column') flex = { flex: 0 }
-      if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
-      if (!parentFlexDirection) this.logMissingParentFlexDirection('maxHeight')
-    }
-    if (maxWidth) {
-      if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
-      // if (parentFlexDirection === 'row') flex = { flex: 0 }
-      if (!parentFlexDirection) this.logMissingParentFlexDirection('maxWidth')
-    }
-
-    if (shrink) flex = { flex: 0 }
-    if (shrink) alignSelf = { alignSelf: 'auto' }
-
-    if (shrinkVertical) {
-      if (parentFlexDirection === 'column') flex = { flex: 0 }
-      if (parentFlexDirection === 'row') alignSelf = { alignSelf: 'auto' }
-      if (!parentFlexDirection) {
-        this.logMissingParentFlexDirection('shrinkVertical')
+    if (height != null) {
+      heightStyle = { height }
+      if (parentFlexDirection === 'column') {
+        flexStyle = { flex: -1 }
       }
     }
 
-    if (shrinkHorizontal) {
-      if (parentFlexDirection === 'column') alignSelf = { alignSelf: 'auto' }
-      if (parentFlexDirection === 'row') flex = { flex: 0 }
-      if (!parentFlexDirection) {
-        this.logMissingParentFlexDirection('shrinkHorizontal')
+    if (width != null) {
+      widthStyle = { width }
+      if (parentFlexDirection === 'row') {
+        flexStyle = { flex: -1 }
       }
     }
 
-    const childrenWithDirection = withDirection('column', children)
+    if (maxHeight != null) {
+      maxHeightStyle = { maxHeight }
+    }
+    if (maxWidth != null) {
+      maxWidthStyle = { maxWidth }
+    }
+
+    if (shrink || shrinkVertical) {
+      heightStyle = { height: null }
+      if (parentFlexDirection === 'column') {
+        flexStyle = { flex: -1 }
+      }
+    }
+    if (shrink || shrinkHorizontal) {
+      widthStyle = { width: null }
+      if (parentFlexDirection === 'row') {
+        flexStyle = { flex: -1 }
+      }
+    }
 
     if (this.missingParentFlexDirection) {
       displayMissingParentFlexDirectionWarning(
@@ -185,11 +181,10 @@ export class Col extends Component<Props> {
         style={[
           styles.column,
           style,
-          alignItems,
-          alignSelf,
+          alignItemsStyle,
           debugStyle,
-          flex,
-          justifyContent,
+          flexStyle,
+          justifyContentStyle,
           wrapStyle,
           heightStyle,
           widthStyle,
@@ -198,7 +193,7 @@ export class Col extends Component<Props> {
         ]}
         {...props}
       >
-        {childrenWithDirection}
+        {dontPassProps ? children : withParentFlexDirection('column', children)}
       </View>
     )
   }
