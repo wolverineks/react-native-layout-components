@@ -16,7 +16,7 @@ export const COLORS = {
   BLUE: 'skyblue'
 }
 
-const styles = StyleSheet.create({
+const rawStyles = {
   backgroundLabel: { height: '100%', width: '100%', position: 'absolute' },
   backgroundText: { fontSize: 32, opacity: 0.5 },
   header: { backgroundColor: COLORS.RED },
@@ -24,7 +24,9 @@ const styles = StyleSheet.create({
   rowInRow: { backgroundColor: COLORS.YELLOW },
   rowInCol: { backgroundColor: COLORS.GREEN },
   colInRow: { backgroundColor: COLORS.BLUE }
-})
+}
+
+const styles: typeof rawStyles = StyleSheet.create(rawStyles)
 
 type Props = {||}
 export class MaxHeightShowcaseStory extends React.Component<Props> {

@@ -260,7 +260,7 @@ const NumPad = ({ onPress, ...props }) => {
 }
 const NumPadRow = Row
 const NumPadButton = ({ label, onPress = () => null, ...props }) => (
-  <Col margin={4} borderRadius={15} {...props}>
+  <Col margin={4} padding={4} borderRadius={15} {...props}>
     <TouchableOpacity
       style={{ height: '100%', width: '100%', backgroundColor: '#0099cc' }}
       onPress={onPress}

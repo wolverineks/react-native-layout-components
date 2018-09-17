@@ -16,7 +16,7 @@ export const COLORS = {
   BLUE: 'skyblue'
 }
 
-const styles = StyleSheet.create({
+const rawStyles = {
   backgroundLabel: { height: '100%', width: '100%', position: 'absolute' },
   backgroundText: { fontSize: 32, opacity: 0.5 },
   header: { backgroundColor: COLORS.RED },
@@ -24,7 +24,9 @@ const styles = StyleSheet.create({
   rowInRow: { backgroundColor: COLORS.YELLOW },
   rowInCol: { backgroundColor: COLORS.GREEN },
   colInRow: { backgroundColor: COLORS.BLUE }
-})
+}
+
+const styles: typeof rawStyles = StyleSheet.create(rawStyles)
 
 type Props = {||}
 export class SizeShowcaseStory extends React.Component<Props> {
@@ -84,31 +86,11 @@ const ColInCol = () => {
   )
 }
 
-const RowInRow = props => {
+const RowInRow = () => {
   return (
-    <Row style={styles.rowInRow} {...props}>
+    <Row style={styles.rowInRow} bottom>
       <BackgroundLabel label={'<Row bottom>'} />
-      <Row debug>
-        <Text>Hello, World!</Text>
-      </Row>
-      {/* <View
-        style={{
-          backgroundColor: 'blue',
-          alignItems: 'center',
-          alignSelf: 'auto',
-          justifyContent: 'center',
-          flex: -1,
-          maxHeight: 500,
-          height: 500,
-          flexWrap: 'wrap',
-          maxWidth: 100,
-          borderColor: 'red',
-          borderWidth: 1
-        }}
-      >
-        <Text>KSJDNV</Text>
-      </View> */}
-      {/* <Row debug maxHeight={135} height={100}>
+      <Row debug maxHeight={135} height={100}>
         <Text>{'<Row maxHeight={135}>'}</Text>
       </Row>
       <Row debug width={145}>
@@ -116,7 +98,7 @@ const RowInRow = props => {
       </Row>
       <Row debug height={100} width={100}>
         <Text>{'<Row height={100} width={100}>'}</Text>
-      </Row> */}
+      </Row>
     </Row>
   )
 }
