@@ -58,14 +58,8 @@ export class ExampleSceneStory extends React.Component<Props, State> {
 
           <Spacer height={8} />
 
-          <Row
-            flex={1}
-            maxHeight={60}
-            maxWidth={500}
-            marginLeft={'auto'}
-            marginRight={'auto'}
-          >
-            <Slider />
+          <Row shrinkVertical>
+            <Slider height={50} />
           </Row>
         </Col>
 
@@ -190,14 +184,14 @@ const TransactionDetails = ({
       padding={12}
       debug={debug}
     >
-      <Col shrinkHorizontal>
-        <Row right>
+      <Col right shrinkHorizontal>
+        <Row shrinkHorizontal>
           <Text bold size={16}>
             Fee:
           </Text>
         </Row>
 
-        <Row right>
+        <Row right shrinkHorizontal>
           <Text bold size={16}>
             Address:
           </Text>
@@ -206,7 +200,7 @@ const TransactionDetails = ({
 
       <Spacer width={8} />
 
-      <Col>
+      <Col left>
         <Row left>
           <Text size={16}>{fee}</Text>
           <Text size={16}> {primarySymbol}</Text>
@@ -234,25 +228,39 @@ const NumPad = ({ onPress, ...props }) => {
     <Col maxWidth={600} {...props}>
       <NumPadRow>
         <NumPadButton label={'1'} />
+        <Spacer width={4} />
         <NumPadButton label={'2'} />
+        <Spacer width={4} />
         <NumPadButton label={'3'} />
       </NumPadRow>
 
+      <Spacer height={4} />
+
       <NumPadRow>
         <NumPadButton label={'4'} />
+        <Spacer width={4} />
         <NumPadButton label={'5'} />
+        <Spacer width={4} />
         <NumPadButton label={'6'} />
       </NumPadRow>
 
+      <Spacer height={4} />
+
       <NumPadRow>
         <NumPadButton label={'7'} />
+        <Spacer width={4} />
         <NumPadButton label={'8'} />
+        <Spacer width={4} />
         <NumPadButton label={'9'} />
       </NumPadRow>
 
+      <Spacer height={4} />
+
       <NumPadRow>
         <NumPadButton label={'.'} />
+        <Spacer width={4} />
         <NumPadButton label={'0'} />
+        <Spacer width={4} />
         <NumPadButton label={'<-'} />
       </NumPadRow>
     </Col>
@@ -260,7 +268,7 @@ const NumPad = ({ onPress, ...props }) => {
 }
 const NumPadRow = Row
 const NumPadButton = ({ label, onPress = () => null, ...props }) => (
-  <Col margin={4} padding={4} borderRadius={15} {...props}>
+  <Col borderRadius={15} {...props}>
     <TouchableOpacity
       style={{ height: '100%', width: '100%', backgroundColor: '#0099cc' }}
       onPress={onPress}
