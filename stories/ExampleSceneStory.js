@@ -73,6 +73,7 @@ export class ExampleSceneStory extends React.Component<Props, State> {
             // eslint-disable-next-line
             style={{ borderRadius: 10, backgroundColor: '#0099cc' }}
             padding={12}
+            shrinkVertical
           >
             <TransactionDetails
               address={this.state.address}
@@ -87,12 +88,14 @@ export class ExampleSceneStory extends React.Component<Props, State> {
 
           <Spacer maxHeight={8} />
 
-          <Row
-            // eslint-disable-next-line
-            style={{ backgroundColor: '#0099cc', borderRadius: 130 }}
-            height={60}
-          >
-            <Slider />
+          <Row>
+            <Row
+              // eslint-disable-next-line
+              style={{ backgroundColor: '#0099cc', borderRadius: 130 }}
+              height={60}
+            >
+              <Slider />
+            </Row>
           </Row>
 
           <Spacer maxHeight={8} />
@@ -215,30 +218,37 @@ const TransactionDetails = ({
   debug
 }: TransactionDetailsProps) => {
   return (
-    <Row debug={debug}>
-      <Col right spaceEvenly shrinkHorizontal>
-        <Text bold size={16}>
-          Fee:
-        </Text>
-
-        <Text bold size={16}>
-          Address:
-        </Text>
+    <Row debug={debug} shrinkVertical>
+      <Col right shrink>
+        <Row shrink padding={4}>
+          <Text bold size={16}>
+            Fee:
+          </Text>
+        </Row>
+        <Row shrink padding={4}>
+          <Text bold size={16}>
+            Address:
+          </Text>
+        </Row>
       </Col>
 
-      <Spacer width={8} />
+      <Spacer width={8} shrinkVertical />
 
-      <Col left spaceEvenly>
-        <Text>
-          <Text size={16}>{fee}</Text>
-          <Text size={16}> {primarySymbol}</Text>
-          <Text size={16}> ({secondarySymbol}</Text>
-          <Text size={16}> {secondaryFee})</Text>
-        </Text>
+      <Col left spaceEvenly shrinkVertical>
+        <Row left shrinkVertical padding={4}>
+          <Text>
+            <Text size={16}>{fee}</Text>
+            <Text size={16}> {primarySymbol}</Text>
+            <Text size={16}> ({secondarySymbol}</Text>
+            <Text size={16}> {secondaryFee})</Text>
+          </Text>
+        </Row>
 
-        <Text ellipsizeMode={'middle'} numberOfLines={1} size={16}>
-          {address}
-        </Text>
+        <Row left shrinkVertical padding={4}>
+          <Text ellipsizeMode={'middle'} numberOfLines={1} size={16}>
+            {address}
+          </Text>
+        </Row>
       </Col>
     </Row>
   )
