@@ -9,7 +9,6 @@ import Col from '../src/Col.js'
 type Props = {||}
 type State = {|
   address: string,
-  destination: string,
   exchangeRate: number,
   fee: string,
   primary: string,
@@ -18,8 +17,7 @@ type State = {|
   secondary: string,
   secondaryCurrencyCode: string,
   secondaryFee: string,
-  secondarySymbol: string,
-  uniqueIdentifier: string
+  secondarySymbol: string
 |}
 
 export class ExampleSceneStory extends React.Component<Props, State> {
@@ -38,33 +36,70 @@ export class ExampleSceneStory extends React.Component<Props, State> {
 
   render () {
     return (
+      // eslint-disable-next-line
       <Layout style={{ backgroundColor: '#0066cc' }}>
-        <Col padding={8}>
-          <Row shrinkVertical>
-            <ExchangeRate {...this.state} />
-          </Row>
-
+        <Col spaceBetween paddingHorizontal={8}>
           <Spacer height={8} />
 
-          <Row>
-            <FlipInput {...this.state} />
+          <Row
+            // eslint-disable-next-line
+            style={{ backgroundColor: '#0099cc', borderRadius: 10 }}
+            height={32}
+            padding={4}
+          >
+            <ExchangeRate exchangeRate={this.state.exchangeRate} />
           </Row>
 
-          <Spacer height={8} />
+          <Spacer maxHeight={8} />
 
-          <Row>
-            <TransactionDetails {...this.state} />
+          <Row
+            // eslint-disable-next-line
+            style={{ backgroundColor: '#0099cc', borderRadius: 10 }}
+            height={100}
+          >
+            <FlipInput
+              primary={this.state.primary}
+              primaryCurrencyCode={this.state.primaryCurrencyCode}
+              primarySymbol={this.state.primarySymbol}
+              secondary={this.state.secondary}
+              secondaryCurrencyCode={this.state.secondaryCurrencyCode}
+              secondarySymbol={this.state.secondarySymbol}
+            />
           </Row>
 
-          <Spacer height={8} />
+          <Spacer maxHeight={8} />
 
-          <Row shrinkVertical>
-            <Slider height={50} />
+          <Row
+            // eslint-disable-next-line
+            style={{ borderRadius: 10, backgroundColor: '#0099cc' }}
+            padding={12}
+          >
+            <TransactionDetails
+              address={this.state.address}
+              fee={this.state.fee}
+              primary={this.state.primary}
+              primarySymbol={this.state.primarySymbol}
+              secondary={this.state.secondary}
+              secondaryFee={this.state.secondaryFee}
+              secondarySymbol={this.state.secondarySymbol}
+            />
           </Row>
+
+          <Spacer maxHeight={8} />
+
+          <Row
+            // eslint-disable-next-line
+            style={{ backgroundColor: '#0099cc', borderRadius: 130 }}
+            height={60}
+          >
+            <Slider />
+          </Row>
+
+          <Spacer maxHeight={8} />
         </Col>
 
-        <Row maxHeight={400} flex={1}>
-          <NumPad onPress={() => null} />
+        <Row height={250}>
+          <NumPad />
         </Row>
       </Layout>
     )
@@ -73,11 +108,12 @@ export class ExampleSceneStory extends React.Component<Props, State> {
 
 export type TextProps = {|
   bold?: boolean,
-  children?: string,
+  children?: string | number,
   size?: number
 |}
 const Text = ({ children, size = 12, bold, ...props }: TextProps) => (
   <RNText
+    // eslint-disable-next-line
     style={[{ fontSize: size, color: 'white' }, bold && { fontWeight: 'bold' }]}
     {...props}
   >
@@ -107,7 +143,7 @@ const FlipInput = (props: FlipInputProps) => {
   } = props
 
   return (
-    <Row style={{ borderRadius: 10, backgroundColor: '#0099cc' }}>
+    <Row>
       <Col width={'15%'}>
         <TouchableOpacity onPress={() => null}>
           <Col>
@@ -120,8 +156,7 @@ const FlipInput = (props: FlipInputProps) => {
       <Col>
         <Row>
           <Text bold size={24}>
-            {' '}
-            {primarySymbol}{' '}
+            {primarySymbol}
           </Text>
           <Text bold size={24}>
             {primary}
@@ -147,8 +182,9 @@ const FlipInput = (props: FlipInputProps) => {
   )
 }
 
-const ExchangeRate = ({ exchangeRate, debug }) => (
-  <Row borderRadius={10} backgroundColor={'#0099cc'} debug={debug}>
+const ExchangeRate = ({ exchangeRate, ...props }) => (
+  // eslint-disable-next-line
+  <Row {...props}>
     <Text size={18}>B </Text>
     <Text size={18}>1</Text>
     <Text size={18}> = </Text>
@@ -161,11 +197,11 @@ const ExchangeRate = ({ exchangeRate, debug }) => (
 export type TransactionDetailsProps = {|
   address: string,
   debug?: boolean,
-  fee: number,
-  primary: number,
+  fee: string,
+  primary: string,
   primarySymbol: string,
-  secondary: number,
-  secondaryFee: number,
+  secondary: string,
+  secondaryFee: string,
   secondarySymbol: string
 |}
 const TransactionDetails = ({
@@ -179,59 +215,51 @@ const TransactionDetails = ({
   debug
 }: TransactionDetailsProps) => {
   return (
-    <Row
-      style={{ borderRadius: 10, backgroundColor: '#0099cc' }}
-      padding={12}
-      debug={debug}
-    >
-      <Col right shrinkHorizontal>
-        <Row shrinkHorizontal>
-          <Text bold size={16}>
-            Fee:
-          </Text>
-        </Row>
+    <Row debug={debug}>
+      <Col right spaceEvenly shrinkHorizontal>
+        <Text bold size={16}>
+          Fee:
+        </Text>
 
-        <Row right shrinkHorizontal>
-          <Text bold size={16}>
-            Address:
-          </Text>
-        </Row>
+        <Text bold size={16}>
+          Address:
+        </Text>
       </Col>
 
       <Spacer width={8} />
 
-      <Col left>
-        <Row left>
+      <Col left spaceEvenly>
+        <Text>
           <Text size={16}>{fee}</Text>
           <Text size={16}> {primarySymbol}</Text>
           <Text size={16}> ({secondarySymbol}</Text>
           <Text size={16}> {secondaryFee})</Text>
-        </Row>
+        </Text>
 
-        <Row left>
-          <Text ellipsizeMode={'middle'} numberOfLines={1} size={16}>
-            {address}
-          </Text>
-        </Row>
+        <Text ellipsizeMode={'middle'} numberOfLines={1} size={16}>
+          {address}
+        </Text>
       </Col>
     </Row>
   )
 }
 
-const Slider = ({ ...props }) => (
-  <Row style={{ backgroundColor: '#0099cc', borderRadius: 130 }} {...props}>
+const Slider = () => (
+  // eslint-disable-next-line
+  <Row>
     <Text size={24}>{'<- <- <- <- <- <- <- <- <-'}</Text>
   </Row>
 )
+
 const NumPad = ({ onPress, ...props }) => {
   return (
     <Col maxWidth={600} {...props}>
       <NumPadRow>
-        <NumPadButton label={'1'} />
+        <NumPadButton label={'7'} />
         <Spacer width={4} />
-        <NumPadButton label={'2'} />
+        <NumPadButton label={'8'} />
         <Spacer width={4} />
-        <NumPadButton label={'3'} />
+        <NumPadButton label={'9'} />
       </NumPadRow>
 
       <Spacer height={4} />
@@ -247,11 +275,11 @@ const NumPad = ({ onPress, ...props }) => {
       <Spacer height={4} />
 
       <NumPadRow>
-        <NumPadButton label={'7'} />
+        <NumPadButton label={'1'} />
         <Spacer width={4} />
-        <NumPadButton label={'8'} />
+        <NumPadButton label={'2'} />
         <Spacer width={4} />
-        <NumPadButton label={'9'} />
+        <NumPadButton label={'3'} />
       </NumPadRow>
 
       <Spacer height={4} />
@@ -266,12 +294,15 @@ const NumPad = ({ onPress, ...props }) => {
     </Col>
   )
 }
+
 const NumPadRow = Row
-const NumPadButton = ({ label, onPress = () => null, ...props }) => (
-  <Col borderRadius={15} {...props}>
+const NumPadButton = ({ label, ...props }) => (
+  // eslint-disable-next-line
+  <Col style={{ borderRadius: 15 }} {...props}>
     <TouchableOpacity
+      // eslint-disable-next-line
       style={{ height: '100%', width: '100%', backgroundColor: '#0099cc' }}
-      onPress={onPress}
+      onPress={() => null}
     >
       <Col>
         <Text bold size={30}>
