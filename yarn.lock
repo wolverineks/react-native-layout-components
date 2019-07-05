@@ -5780,8 +5780,8 @@ merge2@^1.2.1:
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.2.2.tgz#03212e3da8d86c4d8523cebd6318193414f94e34"
 
 merge@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/merge/-/merge-1.2.0.tgz#7531e39d4949c281a66b8c5a6e0265e8b05894da"
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/merge/-/merge-1.2.1.tgz#38bebf80c3220a8a487b6fcfb3941bb11720c145"
 
 methods@^1.1.1, methods@~1.1.2:
   version "1.1.2"
@@ -6965,9 +6965,10 @@ react-native-maps@0.21.0:
     babel-plugin-module-resolver "^2.3.0"
     babel-preset-react-native "1.9.0"
 
-"react-native-maps@git+https://github.com/exponent/react-native-maps.git#v0.12.2-exp.1":
+"react-native-maps@git+https://github.com/exponent/react-native-maps#v0.12.2-exp.1":
   version "0.12.2"
-  resolved "git+https://github.com/exponent/react-native-maps.git#268871ed909b02267671fb40576f50963f09bd7c"
+  uid "268871ed909b02267671fb40576f50963f09bd7c"
+  resolved "git+https://github.com/exponent/react-native-maps#268871ed909b02267671fb40576f50963f09bd7c"
 
 "react-native-maps@https://github.com/expo/react-native-maps/archive/0.20.1-exp.0.tar.gz":
   version "0.20.1"
@@ -7006,9 +7007,10 @@ react-native-svg@6.2.2:
     lodash "^4.16.6"
     pegjs "^0.10.0"
 
-"react-native-svg@git+https://github.com/exponent/react-native-svg.git#4.4.1":
+"react-native-svg@git+https://github.com/exponent/react-native-svg#4.4.1":
   version "4.4.1"
-  resolved "git+https://github.com/exponent/react-native-svg.git#e26bec094b87ada3fa2f2557210226d06f1aec5e"
+  uid e26bec094b87ada3fa2f2557210226d06f1aec5e
+  resolved "git+https://github.com/exponent/react-native-svg#e26bec094b87ada3fa2f2557210226d06f1aec5e"
   dependencies:
     color "^0.11.1"
     lodash "^4.0.0"
