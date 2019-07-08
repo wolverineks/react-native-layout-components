@@ -37,7 +37,7 @@
     "eslint-plugin-standard": "^3.1.0",
     "flow-bin": "^0.79.1",
     "husky": "^0.14.3",
-    "import-sort-cli": "^5.2.0",
+    "import-sort-cli": "^6.0.0",
     "import-sort-parser-babylon": "^5.2.0",
     "import-sort-style-module": "^5.0.0",
     "jest": "^23.5.0",
